@@ -7,7 +7,7 @@ class Parcela {
 	const property plantas = #{}
 	
 	method superficie() = ancho * largo
-	method cantidadPlantas() = plantas.size
+	method cantidadPlantas() = plantas.size() //faltaban los paréntesis y no compilaba
 	method cantidadMaxima(){ 
 		if(ancho>largo){return self.superficie().div(5)}
 		else{return self.superficie().div(3)+largo}
@@ -19,21 +19,22 @@ class Parcela {
 		}
 		if(planta.horasSolTolerado()>horasSol+2){
 			self.error("la planta no puede ser colocada ya que supera el maximo de horas de sol de la parcela")
-		}else{
-			plantas.add(planta)
 		}
+		//No hace falta el ese. Cuando se produce una excepcion se corta el flujo	
+		plantas.add(planta)
+		
 	
 	}
 	
-	method seAsociaBien() = null
-	method parcelaIdealQuinoa() = plantas.any({p=>p.altura()<1.5})
+	method seAsociaBien(unaPlanta) = null //Debía ser un método abstracto y recibir una planta
+	method parcelaIdealQuinoa() = plantas.all({p=>p.altura()<1.5}) //todas esten por debajo de 1.5
 	
 }
 
 class ParcelaEcologica inherits Parcela{
-	method seAsociaBien(parcela) = not self.tieneComplicaciones() and plantas.all({p=>p.parcelaIdeal(parcela)})
+	method seAsociaBien(unaPlanta) = not self.tieneComplicaciones() and unaPlanta.parcelaIdeal(self)
 }
 
 class ParcelaIndustrial inherits Parcela{
-	method seAsociaBien() = plantas.size() <= 2 and plantas.all({p=>p.esFuerte()})
+	//method seAsociaBien() = plantas.size() <= 2 and plantas.all({p=>p.esFuerte()})
 }

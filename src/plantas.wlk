@@ -1,13 +1,13 @@
 import parcelas.*
 
 class Planta {
-	const anioObtenida = "desconocido"
-	var property altura = "desconocido"
-	var property horasSolTolerado = "desconocido"
+	const anioObtenida = "desconocido" //No debían estar inicializados
+	var property altura = "desconocido" //No debían estar inicializados
+	var property horasSolTolerado = "desconocido" //horasSolTolerado debía ser un método abstracto
 	
 	method esFuerte() = self.horasSolTolerado() > 10
 	method daSemilla() = self.esFuerte()
-	method espacioOcupado() = null
+	method espacioOcupado() = null  // debía ser un método abstracto
 	
 	//implementacion de parcelas ideales
 	method parcelaIdeal(parcela) 
@@ -18,7 +18,7 @@ class Planta {
 
 class Menta inherits Planta {
 	override method horasSolTolerado() = 6
-	override method daSemilla() = super() or altura > 0.4
+	override method daSemilla() = super() or altura > 4 //4metros
 	override method espacioOcupado() = altura * 3
 	
 	//implementacion de parcelas ideales
@@ -39,7 +39,7 @@ class Soja inherits Planta{
 		}
 	}
 	
-	override method daSemilla() = super() or anioObtenida > 2007 and altura > 1
+	override method daSemilla() = super() or (anioObtenida > 2007 and altura > 1) //faltaron un parentesis 
 	override method espacioOcupado() = altura / 2
 	
 	//implementacion de parcelas ideales

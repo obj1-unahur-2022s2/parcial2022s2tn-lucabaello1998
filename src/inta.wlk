@@ -11,5 +11,6 @@ object inta{
 	
 	method parcelaConMayorAsociadas() = parcelasEstudiadas.max({p=>p.seAsociaBien()})
 	method parcelas4omasPlantas() = parcelasEstudiadas.filter({p=>p.plantas().size()>4})
+	//No esta completo
 	method parcelaMasAutosustentable() = self.parcelas4omasPlantas()
 }
