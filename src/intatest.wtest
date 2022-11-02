@@ -1,0 +1,35 @@
+import parcelas.*
+import plantas.*
+import inta.*
+
+describe "test inta"{
+	
+	const parcela1 = new ParcelaEcologica(ancho=30,largo=1,horasSol=8)
+	const parcela2 = new ParcelaIndustrial(ancho=10,largo=1,horasSol=10)
+	const parcela3 = new Parcela(ancho=20,largo=1,horasSol=6)
+	const quinoa1 = new Quinoa(horasSolTolerado=9,anioObtenida=2010)
+	const soja1 = new Soja(altura=3)
+	const soja2 = new Soja(altura=0.5)
+	const sojaTrans1 =  new SojaTransgenica(altura=0.6,anioObtenida=2009)
+	const hierba1 = new HierbaBuena(altura=0.3)
+	const menta1 = new Menta(altura=1)
+	
+	method initialize(){
+		parcela1.plantarPlanta(soja2)
+		parcela1.plantarPlanta(soja1)
+		parcela2.plantarPlanta(sojaTrans1)
+		//parcela3.plantarPlanta(soja1)
+		//parcela3.plantarPlanta(hierba1)
+		//parcela3.plantarPlanta(menta1)
+	}
+	
+	test "parcela1 las soja no asocia bien"{
+		assert.notThat(parcela1.seAsociaBien(parcela1))
+	}
+	
+	test "parcela2 soja trans asocia bien"{
+		assert.that(parcela2.seAsociaBien())
+	}
+	
+	
+}

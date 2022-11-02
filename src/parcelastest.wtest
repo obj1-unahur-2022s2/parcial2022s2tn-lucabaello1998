@@ -1,2 +1,44 @@
 import parcelas.*
+import plantas.*
+
+describe "test parcelas"{
+	const soja1 = new Soja(altura=3)
+	const soja2 = new Soja(altura=2)
+	const soja3 = new Soja(altura=3)
+	const soja4 = new Soja(altura=5)
+	const soja5 = new Soja(altura=3)
+	const quinoa1 = new Quinoa(horasSolTolerado=12,anioObtenida=2010)
+	const menta1 = new Menta(altura=1)
+	const sojaTrans1 =  new SojaTransgenica(altura=0.6,anioObtenida=2009)
+	
+	const parcela1 = new Parcela(ancho=20,largo=1,horasSol=8)
+	const parcela2 = new Parcela(ancho=20,largo=1,horasSol=9)
+	
+	method initialize(){
+		parcela1.plantarPlanta(soja1)
+		parcela1.plantarPlanta(soja2)
+		parcela1.plantarPlanta(soja3)
+	}
+	
+	
+	test "parcela1 - 20mt2 y 4 plantas maximo"{
+		assert.equals(20,parcela1.superficie())
+		assert.equals(4,parcela1.cantidadMaxima())
+	}
+	
+	test "parcela1 - testeo de añadido de plantas y no tener complicacion"{
+		parcela1.plantarPlanta(soja4)
+		assert.notThat(parcela1.tieneComplicaciones())
+		//parcela1.plantarPlanta(soja5)
+		// si habilita el metodo de arriba arroja el error que es imposible plantar ya que la parcela esta en su capacidad maxima
+	}
+	
+	test "parcela1 y 2 - test de parcela idea"{
+		assert.that(soja1.parcelaIdeal(parcela2)) //9 horas de sol en parcela2 y soja1
+		assert.notThat(quinoa1.parcelaIdeal(parcela1))//las plantas superan el maximo de lo ideal de la quinoa
+		assert.that(menta1.parcelaIdeal(parcela1))// parcela 1 con 20mt2
+		assert.notThat(sojaTrans1.parcelaIdeal(parcela1))// tiene mas de 1 la parcela asi que no le gusta a la soja transgenica
+	}
+	
+}
 
