@@ -4,9 +4,12 @@ import plantas.*
 object inta{
 	var property parcelasEstudiadas=#{}
 	
+	method agregarParcela(parcela) = parcelasEstudiadas.add(parcela) 
+	
 	method plantasPorParcela() = parcelasEstudiadas.sum({parcela=>parcela.plantas().size()})
-	method promedioDePlantas() = self.plantasPorParcela() / parcelasEstudiadas.size()
+	method promedioDePlantas() = self.plantasPorParcela().div(parcelasEstudiadas.size())
 	
 	method parcelaConMayorAsociadas() = parcelasEstudiadas.max({p=>p.seAsociaBien()})
-	method parcelaMasAutosustentable() = parcelasEstudiadas.count({p=>p.size() > 4}) and self.parcelaConMayorAsociadas()
+	method parcelas4omasPlantas() = parcelasEstudiadas.filter({p=>p.plantas().size()>4})
+	method parcelaMasAutosustentable() = self.parcelas4omasPlantas()
 }

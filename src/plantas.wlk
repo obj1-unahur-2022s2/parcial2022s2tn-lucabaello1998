@@ -65,7 +65,7 @@ class SojaTransgenica inherits Soja{
 	
 	//implementacion de parcelas ideales
 	
-	override method parcelaIdeal(parcela) = parcela.cantidadMaxima() == 1
+	override method parcelaIdeal(parcela) = parcela.cantidadPlantas() == 1
 	
 	
 	

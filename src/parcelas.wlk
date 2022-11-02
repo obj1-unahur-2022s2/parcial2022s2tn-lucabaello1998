@@ -7,6 +7,7 @@ class Parcela {
 	const property plantas = #{}
 	
 	method superficie() = ancho * largo
+	method cantidadPlantas() = plantas.size
 	method cantidadMaxima(){ 
 		if(ancho>largo){return self.superficie().div(5)}
 		else{return self.superficie().div(3)+largo}
@@ -21,8 +22,10 @@ class Parcela {
 		}else{
 			plantas.add(planta)
 		}
+	
 	}
 	
+	method seAsociaBien() = null
 	method parcelaIdealQuinoa() = plantas.any({p=>p.altura()<1.5})
 	
 }
